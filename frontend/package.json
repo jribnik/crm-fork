@@ -41,7 +41,7 @@
   },
   "resolutions": {
     "dompurify": "3.4.0",
-    "brace-expansion": "2.1.0",
+    "brace-expansion": "2.0.1",
     "picomatch": "4.0.4"
   },
   "devDependencies": {
