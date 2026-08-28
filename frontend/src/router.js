@@ -103,6 +103,10 @@ const routes = [
     component: () => import('@/pages/CallLogs.vue'),
   },
   {
+    path: '/events',
+    name: 'Events',
+  },
+  {
     path: '/data-import',
     name: 'DataImportList',
     component: () => import('@/pages/DataImport.vue'),
@@ -152,6 +156,12 @@ let router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   router.previousRoute = from
+
+  // Events has no in-app page; deep-link out to Frappe's native Event calendar.
+  if (to.name === 'Events') {
+    window.location.href = '/app/event'
+    return
+  }
 
   const { isLoggedIn, user } = sessionStore()
   const { users, isCrmUser, isAdmin } = usersStore()

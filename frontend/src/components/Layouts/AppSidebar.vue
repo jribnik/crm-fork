@@ -154,6 +154,7 @@
 
 <script setup>
 import BrushCleaningIcon from '~icons/lucide/brush-cleaning'
+import CalendarIcon from '~icons/lucide/calendar'
 import LucideLayoutDashboard from '~icons/lucide/layout-dashboard'
 import CRMLogo from '@/components/Icons/CRMLogo.vue'
 import InviteIcon from '@/components/Icons/InviteIcon.vue'
@@ -258,6 +259,11 @@ const links = [
     label: 'Call Logs',
     icon: PhoneIcon,
     to: 'Call Logs',
+  },
+  {
+    label: 'Events',
+    icon: CalendarIcon,
+    to: 'Events',
   },
 ]
 
