@@ -107,8 +107,15 @@ const routes = [
     name: 'Events',
   },
   {
-    path: '/proposals',
+    alias: '/proposals',
+    path: '/proposals/view/:viewType?',
     name: 'Proposals',
+    component: () => import('@/pages/Proposals.vue'),
+  },
+  {
+    path: '/proposals/:proposalId',
+    name: 'Proposal',
+    props: true,
   },
   {
     path: '/data-import',
@@ -167,10 +174,11 @@ router.beforeEach(async (to, from, next) => {
     return
   }
 
-  // ZeroMark Proposal is a plain custom doctype with no in-app CRM page;
-  // deep-link out to its native Desk list view (same pattern as Events).
-  if (to.name === 'Proposals') {
-    window.location.href = '/app/zeromark-proposal'
+  // ZeroMark Proposal has a real in-app list page now, but no bespoke
+  // single-record edit form (that's a much bigger build for 20+ fields) --
+  // opening one record still deep-links out to its native Desk form.
+  if (to.name === 'Proposal') {
+    window.location.href = `/app/zeromark-proposal/${to.params.proposalId}`
     return
   }
 
