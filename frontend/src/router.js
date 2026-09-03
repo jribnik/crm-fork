@@ -107,6 +107,10 @@ const routes = [
     name: 'Events',
   },
   {
+    path: '/proposals',
+    name: 'Proposals',
+  },
+  {
     path: '/data-import',
     name: 'DataImportList',
     component: () => import('@/pages/DataImport.vue'),
@@ -160,6 +164,13 @@ router.beforeEach(async (to, from, next) => {
   // Events has no in-app page; deep-link out to Frappe's native Event calendar.
   if (to.name === 'Events') {
     window.location.href = '/app/event'
+    return
+  }
+
+  // ZeroMark Proposal is a plain custom doctype with no in-app CRM page;
+  // deep-link out to its native Desk list view (same pattern as Events).
+  if (to.name === 'Proposals') {
+    window.location.href = '/app/zeromark-proposal'
     return
   }
 
