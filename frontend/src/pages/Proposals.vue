@@ -12,7 +12,7 @@
         variant="solid"
         :label="__('Create')"
         iconLeft="plus"
-        @click="() => (window.location.href = '/app/zeromark-proposal/new')"
+        @click="createProposal"
       />
     </template>
   </LayoutHeader>
@@ -63,11 +63,27 @@ import ViewControls from '@/components/ViewControls.vue'
 import { getMeta } from '@/stores/meta'
 import { formatDate } from '@/utils'
 import { timestampCell } from '@/composables/useTimelinePreferences'
+import { useDoctypeModal } from '@/composables/doctypeModal'
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import EmptyState from '../components/ListViews/EmptyState.vue'
 
 const { getFormattedPercent, getFormattedFloat, getFormattedCurrency } =
   getMeta('ZeroMark Proposal')
+
+const router = useRouter()
+const { showModal } = useDoctypeModal()
+
+function createProposal() {
+  showModal({
+    doctype: 'ZeroMark Proposal',
+    callbacks: {
+      afterInsert: (d) => {
+        router.push({ name: 'Proposal', params: { proposalId: d.name } })
+      },
+    },
+  })
+}
 
 const proposalsListView = ref(null)
 

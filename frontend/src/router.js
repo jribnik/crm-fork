@@ -115,6 +115,7 @@ const routes = [
   {
     path: '/proposals/:proposalId',
     name: 'Proposal',
+    component: () => import('@/pages/Proposal.vue'),
     props: true,
   },
   {
@@ -171,14 +172,6 @@ router.beforeEach(async (to, from, next) => {
   // Events has no in-app page; deep-link out to Frappe's native Event calendar.
   if (to.name === 'Events') {
     window.location.href = '/app/event'
-    return
-  }
-
-  // ZeroMark Proposal has a real in-app list page now, but no bespoke
-  // single-record edit form (that's a much bigger build for 20+ fields) --
-  // opening one record still deep-links out to its native Desk form.
-  if (to.name === 'Proposal') {
-    window.location.href = `/app/zeromark-proposal/${to.params.proposalId}`
     return
   }
 
